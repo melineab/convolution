@@ -1,13 +1,19 @@
+ convolution - convolution calculator for three-dimensional matrices
 
-CONVOLUTION 3D:
+  This modul provides Convolution class that has a convolution_3d metod.
+The metod performs a convolution operation on the input data.
+Convolution is a mathematical operation on two functions that 
+produces a third function expressing how the shape of one is 
+modified by the other.
+The Convolution class gets the names of the input files, the name 
+of the output file, and the bias value. And the convolution_3d method 
+calculates the convolution according to the input.
 
 
-      The function gets the names of the input files, the name of the output file,
-      the bias value.
-      
+
 INPUT:
       Input files are:
-          File of core matrix,
+          File containing base matrix,
           file of filter matrix
 
       File formats and structure:
