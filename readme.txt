@@ -37,7 +37,21 @@ Convolution class:
                             inverted B  matrix
 
 
-  
+
+Example of convolution of a 3D matrix step by step
+
+1  reading 3D matrices from the files 
+   input_matrix = Matrix().read_from_file('input2.txt')  
+   filter_matrix = Matrix().read_from_file('filter1.txt')
+
+2  define bias value
+   bias = 1
+
+3  calculating 3D convolution
+   convolution = Convolution(input_matrix, filter_matrix, bias).convolution_3d()
+
+4  write result to specified file
+   Matrix().write_to_file('Output.json')
 
 
 * Files must be in .json or .txt format.

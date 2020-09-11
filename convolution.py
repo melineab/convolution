@@ -331,8 +331,6 @@ class Convolution:
             return self.convolution_3d(self.final_result)
 
 		    	
-
-
 if __name__ == "__main__":
     pass
 
