@@ -1,29 +1,51 @@
- convolution - convolution calculator for three-dimensional matrices
+This is readme file for convolution library implemented with python, describing usage of the libary and the details of the convolution algorithm.
 
-  This modul provides Convolution class that has a convolution_3d metod.
-The metod performs a convolution operation on the input data.
-Convolution is a mathematical operation on two functions that 
-produces a third function expressing how the shape of one is 
-modified by the other.
-The Convolution class gets the names of the input files, the name 
-of the output file, and the bias value. And the convolution_3d method 
-calculates the convolution according to the input.
+Description
+
+The python module provides Convolution class and Matrix class.
+
+Convolution class:
+ 
+ Convolution is a mathematical operation on two functions that produces a third function expressing how the 
+ shape of one is modified by the other.
+
+ The Convolution class has a convolution_3d metod. 
+ The metod performs a convolution operation on the input data.
+ The Convolution class receives a 3D input matrix and a 3D filter matrix, a bias value. The bias value mast be integer ot float.
+ The convolution_3d method calculates the convolution according to the input.
 
 
+ Matrix class:
 
-INPUT:
-      Input files are:
-          File containing base matrix,
-          file of filter matrix
+ The Matrix class creates and performs mathematical operations on matrices
+ The class has the following metods:
 
-      File formats and structure:
-          Files must be in .json or .txt format.
+ create_matrix_from_stdin - creates a matrix according to user input 
+ read_from_file*          - takes a file name as an argument and reads a matrix from it
+                            file type mast be txt or json format   
+ write_to_file            - takes a file name and text as arguments and write the text to the file
+ addition                 - takes two matrices as arguments and performs mathematical addition  
+                            of the two matrices
+ subtruction              - takes two matrices as arguments and performs mathematical subtruction 
+                            of the two matrices
+ multiply                 - takes two matrices as arguments and performs mathematical nultiplication 
+                            of the two matrices
+ scalar_multiplication    - takes a number and a matrix as arguments and performs mathematical
+                            scalar multiplication of the matrix
+ invers2x2                - takes 2x2 matrix as argument and performs mathematical invers of the 2x2 matrix 
+ division2x2              - takes two 2x2 matrices(A, B), inverses B matrix and multiplies A matrix by 
+                            inverted B  matrix
+
+
+  
+
+
+* Files must be in .json or .txt format.
+  If it is a .txt file, the matrix mast be in square brackets.
+  Each layer of the matrix must start on a new line, be in square brackets and separated by a comma.
+  Each row of the matrix must be written on a new line in square brackets.
      
-          If it is a .txt file, each row of the matrix must be written on a new line
-          in square brackets. Each layer of the matrix must be enclosed in square brackets and
-          separated by a comma, starting on a new line.
-     
-          Eexample of 2 layer 3D matrix (2x3x3):
+   Eexample of 2 layer 3D matrix (2x3x3):
 
                          [
             first layer   [
@@ -37,34 +59,4 @@ INPUT:
                            [3, 3, 3]
                           ]
                          ]
-
-      Bias value is digit.
-
-
-CALCULATION:
-
-        It computs the  convolution of a 3D matrix with a given input matrix, filter matrix and bias value.
-        Returns the final result matrix.  
-
-OUTPUT:
-        After calculating the convolution of a 3D matrix,
-        the result will be written to the output file .txt or .json with the specified name.
-        
-
-
-
-EXAMPLE STEP BY STEP:
-    
-	import conv_test as c
-
-	c.test('input2.txt', 'filter1.txt', 'output.json', 0)
-
-	1. reads the main matrix from the file input2.txt. 
-   	   converted line by line to a list of numbers and added to the final list, creating the final 3D matrix
-	2. same action with filter1.txt file
-	3. calls the convolution_3d matrix
-   	   takes the ready base matrix(1x32x32), filter matrix(1x5x5) and bias value(0), computes the convolution and returns 
-   	   calculated result(1x28x28)
-	4. write the result to the output.json file
-     
 

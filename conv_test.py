@@ -1,7 +1,7 @@
 # conv_test.py
 
 from matrices import Matrix
-from convolution import Convolution as c
+from convolution import Convolution
 import os
 import time
 
@@ -14,9 +14,10 @@ matrix = Matrix()
 # geting input matrix, filter_matrix
 input_matrix = matrix.read_from_file('input2.txt')
 filter_matrix = matrix.read_from_file('filter1.txt')
-
+bias = 1
 # calling convolution3D
-conv = c(input_matrix, filter_matrix, 1).convolution_3d()
+convolution = Convolution(input_matrix, filter_matrix, bias)
+conv = convolution.convolution_3d()
    
 # writing to file
 
@@ -32,9 +33,10 @@ time.sleep(2)
 # geting input matrix, filter_matrix
 input_matrix = matrix.read_from_file('input.txt')
 filter_matrix = matrix.read_from_file('filter.txt')
-
+bias = 0
 # calling convolution3D
-conv = c(input_matrix, filter_matrix, 1).convolution_3d()
+cconvolution = Convolution(input_matrix, filter_matrix, bias)
+onv = convolution.convolution_3d()
    
 # writing to file
 
@@ -45,6 +47,4 @@ print('Test 2 Done!')
 
 
 
-if __name__ == "__main__":
-    pass                
                     

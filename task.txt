@@ -1,6 +1,7 @@
 Below are the task details:
 
-Description:  The main goal of the task is to implement the application, performing the convolution operation on the input data. The conversion of the image is not expected to be done in scope of this task, so the input is 3 dimensional matrix.
+Description:  The main goal of the task is to implement the application, performing the convolution operation on the input data.
+The conversion of the image is not expected to be done in scope of this task, so the input is 3 dimensional matrix.
 
 
 Theoretical material։
