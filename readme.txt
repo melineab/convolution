@@ -11,7 +11,7 @@ Convolution class:
 
  The Convolution class has a convolution_3d metod. 
  The metod performs a convolution operation on the input data.
- The Convolution class receives a 3D input matrix and a 3D filter matrix, a bias value. The bias value mast be integer ot float.
+ The Convolution class receives a 3D input matrix and a 3D filter matrix, a bias value. The bias value must be integer or float.
  The convolution_3d method calculates the convolution according to the input.
 
 
@@ -22,7 +22,7 @@ Convolution class:
 
  create_matrix_from_stdin - creates a matrix according to user input 
  read_from_file*          - takes a file name as an argument and reads a matrix from it
-                            file type mast be txt or json format   
+                            file type must be txt or json format   
  write_to_file            - takes a file name and text as arguments and write the text to the file
  addition                 - takes two matrices as arguments and performs mathematical addition  
                             of the two matrices
@@ -55,7 +55,7 @@ Example of convolution of a 3D matrix step by step
 
 
 * Files must be in .json or .txt format.
-  If it is a .txt file, the matrix mast be in square brackets.
+  If it is a .txt file, the matrix must be in square brackets.
   Each layer of the matrix must start on a new line, be in square brackets and separated by a comma.
   Each row of the matrix must be written on a new line in square brackets.
      
