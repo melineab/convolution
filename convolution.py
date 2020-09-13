@@ -6,6 +6,7 @@ class Matrix:
     def __init__(self):
         self.matrix = []
         self.input_list = [] 
+        self.inversed_matrix = []
 
     def rows(self):
         return len(self.matrix)
@@ -164,9 +165,10 @@ class Matrix:
     # ----------------    addition of matrices   ------------------------
 
     def addition(self, matrix_a, matrix_b):
+        self.matrix = []
+
         # check correspondence of matrices
         self.checking(matrix_a, matrix_b)
-        self.matrix = []
 
         # addition of two matrices
         for i in range(len(matrix_a)):
@@ -212,7 +214,7 @@ class Matrix:
                 idx = 0
                 res = 0
                 for j in i:
-                    res = res + j * self.matrix_b[idx][n]
+                    res = res + j * matrix_b[idx][n]
                     idx += 1
 
                 new_row.append(round(res, 1))
@@ -235,8 +237,7 @@ class Matrix:
 
     # ----------------    inversion of matrices  2x2  ------------------------
     def inverse2x2(self, matrix):
-        self.inversed_matrix = []
-
+        
         try:
             coefficient = 1 / (matrix[0][0] * matrix[1][1] -
                                 matrix[0][1] * matrix[1][0])
