@@ -18,21 +18,7 @@ class Matrix:
 
     # ------------------- read matrix from stdin ---------------------------
 
-    def create_matrix_from_stdin(self):
-        rows = input(f"input number of rows: ")
-        cols = input(f"input number of colums: ")
-        
-        if rows and cols:
-            try:
-                rows = int(rows)
-                cols = int(cols)
-            except ValueError:
-                print('Number of rows and number of columns mast be numeric')
-                exit()
-        else:
-            print('There is empty imput')
-            exit()
-
+    def create_matrix_from_stdin(self, rows, cols):
         row_list = []
         item = 0
         for i in range(rows):
@@ -52,6 +38,31 @@ class Matrix:
             row_list = []
         return self.matrix    
 
+
+    def create_3d_matrix_from_stdin(self):
+        rows = input("input number of rows: ")
+        cols = input("input number of colums: ")
+        layer = input('input number of layers: ')
+        matrix_3d = []
+
+        if rows and cols and layer:
+            try:
+                rows = int(rows)
+                cols = int(cols)
+                layer = int(layer)
+            except ValueError:
+                print('Number of rows and number of columns mast be numeric')
+                exit()
+        else:
+            print('There is empty imput')
+            exit()
+
+        for n in range(layer):
+            print(f'layer {n+1}')
+            matrix_3d.append(self.create_matrix_from_stdin(rows, cols))
+            self.matrix = [] 
+        self.matrix = matrix_3d
+        return self.matrix
 
     # ----------------- read from file -----------------------------------
 
@@ -163,7 +174,7 @@ class Matrix:
 
     # ----------------    addition of matrices   ------------------------
 
-    def addition(self, matrix_a, matrix_b):
+    def addition_2d(self, matrix_a, matrix_b):
         self.matrix = []
 
         # check correspondence of matrices
@@ -182,7 +193,7 @@ class Matrix:
 
     # ----------------    subtraction of matrices   ------------------------
 
-    def subtraction(self, matrix_a, matrix_b):
+    def subtraction_2d(self, matrix_a, matrix_b):
         self.checking(matrix_a, matrix_b)
         self.matrix = []
 
@@ -197,7 +208,7 @@ class Matrix:
    
    # ----------------    multiplication of matrices   ------------------------
 
-    def multiply(self, matrix_a, matrix_b):
+    def multiply_2d(self, matrix_a, matrix_b):
 
         # checking compatibility of two matrices
         if len(matrix_a[0]) != len(matrix_b):
@@ -223,7 +234,7 @@ class Matrix:
 
     # ----------------    scalar multiplication of matrices   ------------------
 
-    def scalar_multiplication(self, constant, matrix):
+    def scalar_multiplication_2d(self, constant, matrix):
         self.matrix = []
 
         for i in matrix:
@@ -262,7 +273,7 @@ class Matrix:
         self.matrix = []
        
        # Multiply A * 1/B
-        self.matrix = self.multiply(matrix_a, matrix_b)
+        self.matrix = self.multiply_2d(matrix_a, matrix_b)
         
         return self.matrix
 
@@ -323,7 +334,7 @@ class Convolution:
         if len(self.final_result) == 1:
             return self.final_result
         
-        add_res =  matrix.addition(self.final_result[0], self.final_result[1])
+        add_res =  matrix.addition_2d(self.final_result[0], self.final_result[1])
 
         self.final_result[0] = add_res
         self.final_result.remove(self.final_result[1])
