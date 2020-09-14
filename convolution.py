@@ -6,7 +6,6 @@ class Matrix:
     def __init__(self):
         self.matrix = []
         self.input_list = [] 
-        self.inversed_matrix = []
 
     def rows(self):
         return len(self.matrix)
@@ -253,15 +252,16 @@ class Matrix:
             new_row = []
             for n in i:
                 new_row.append(round(n * coefficient, 2))
-            self.inversed_matrix.append(new_row)
-        return self.inversed_matrix
+            self.matrix.append(new_row)
+        return self.matrix
 
     # ----------------    division of matrices  2x2  ------------------------
 
     def division2x2(self, matrix_a, matrix_b):
         matrix_b = self.inverse2x2(matrix_b)
-
-        # Multiply A * 1/B
+        self.matrix = []
+       
+       # Multiply A * 1/B
         self.matrix = self.multiply(matrix_a, matrix_b)
         
         return self.matrix
