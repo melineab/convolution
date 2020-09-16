@@ -6,7 +6,7 @@ class Matrix:
     def __init__(self):
         self.matrix = []
         self.input_list = [] 
-
+        
     def rows(self):
         return len(self.matrix)
     
@@ -80,46 +80,63 @@ class Matrix:
                    ' Ex. filename.txt, filename.json')
             exit()
 
-    # ------------ read from txt -------------------------
-    def read_txt(self, file_name):
-        row_list = []
-        lines = []
-        try:
-            with open(file_name, 'r+') as f:
-            
-                # read file line by line and convert to list of integers
-                for line in f:
-                    if len(line) > 3:
-                        for n, item in enumerate(line):
-                            if item.isnumeric():
-                                item = float(item)
-                                if line[n-1] =='-':
-                                    item = item * -1
-                                lines.append(float(item))  # build matrix line
-                            elif item == ']' and lines:
-                                row_list.append(lines) # build 2D matrix 
-                                lines = []
+    # ----------------file content format check  ----------------
 
-                    elif row_list:
-                        self.input_list.append(row_list)   # build 3D matrix
-                        row_list = []
-        except FileNotFoundError:
-            print('File not found. Enter the full path or check spelling.')
+    def check_file_content(self, file_name):
+        matrix = []
+
+        with open(file_name) as f: 
+            text = f.readlines()
+
+        for i in text:
+            i = i.strip('\n')
+
+            if i.isnumeric():
+                matrix.append(float(i))
+            else:
+                print('All values must be numeric')
+                exit()
+
+        if len(matrix[3::]) != matrix[0] * matrix[1] * matrix[2]:
+            print('wrong number of items')
             exit()
+        return matrix
 
-        return self.input_list            
-    
+    # ------------ read from txt -------------------------
+
+    def read_txt(self, file_name):
+        text = self.check_file_content(file_name)
+        layer = int(text[0])
+        row = int(text[1])
+        col = int(text[2])
+        row_list = []
+        col_list = []
+
+        for i in range(len(text[3::])):
+            col_list.append(text[i+ col])
+            
+            if len(col_list) == col:
+                row_list.append(col_list)
+                col_list = []
+            if len(row_list) == row:
+                self.matrix.append(row_list)
+                row_list = []
+                layer -= 1
+            if layer == 0:
+                return self.matrix
+
+
     # ------------- read from json ------------------------
     def read_json(self):  
         try:    
             with open(self.file_name, 'r+') as f:
-                self.input_list = json.load(f)
+                self.matrix = json.load(f)
 
         except FileNotFoundError:
             print('File not found. Enter the full path or check spelling.')
             exit()
 
-        return self.input_list
+        return self.matrix
         
    # ---------------------- write to file --------------------------
    
@@ -135,19 +152,24 @@ class Matrix:
             return self.write_json(file_name, text)
   
     # -------- write to text file ----------------
+    def write_text(self, file_name, matrix):
+        count = 0
+        layer = len(matrix)
+        row = len(matrix[0])
+        col = len(matrix[0][0])
+        matrix = str(matrix)
+        
+        with open(file_name, 'w+') as f:
+            f.write(f'{layer}\n{row}\n{col}\n')
+            for i in matrix:
+                if i.isnumeric():
+                    f.write(f'{i}\n')
+                    count += 1
 
-    def write_txt(self, file_name, text):
-        for line in text:
-            final_text = ''
-            for i in line:
-                final_text = f'{final_text},\n{i}'
-            with open(file_name, 'a+') as f:
-                f.write(f'[\n')
-                f.write(f' [')
-                f.write(f'{final_text}\n')
-                f.write(f' ]\n')
-                f.write(f']\n')
- 
+        if count != layer * row * col:
+           print('Missing value')
+           exit()
+    
     # ---------  write to json  ------------------------
 
     def write_json(self, file_name, text):    
@@ -165,7 +187,7 @@ class Matrix:
                   "count of rows must match in size.")
             exit()
 
-        col = len(matrix_a[0])
+        col = len(matrix_a)
         for i in range(col):
             if len(matrix_a[i]) != len(matrix_b[i]):
                 print("The two matrices must be the same size, i.e.\n"
@@ -189,6 +211,20 @@ class Matrix:
             self.matrix.append(new_row)
         self.rows = len(self.matrix)
         self.columns = len(self.matrix[0])
+        return self.matrix
+
+
+    def addition_3d(self, matrix3d_a, matrix3d_b):
+        layer_matrix = []
+        if len(matrix3d_a) == len(matrix3d_b):
+            layer = len(matrix3d_a)
+        else:
+            print('Sizes of two matrices must be the same')
+
+        for l in range(layer):
+            layer_matrix.append(self.addition_2d(matrix3d_a[l],matrix3d_b[l]))
+         
+        self.matrix = layer_matrix
         return self.matrix
 
     # ----------------    subtraction of matrices   ------------------------
@@ -232,6 +268,8 @@ class Matrix:
 
         return self.matrix
 
+       
+
     # ----------------    scalar multiplication of matrices   ------------------
 
     def scalar_multiplication_2d(self, constant, matrix):
@@ -258,6 +296,8 @@ class Matrix:
 
         new_matrix = [[matrix[1][1], -matrix[0][1]],
                       [-matrix[1][0], matrix[0][0]]]
+        
+        self.matrix = []
 
         for i in new_matrix:
             new_row = []

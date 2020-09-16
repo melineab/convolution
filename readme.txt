@@ -15,11 +15,11 @@ Convolution class:
  It takes 3 arguments:
   1. Base matrix: it is a three-dimensional matrix, the shape of which changes during convolution
   2. Filter matrix:  it is a 3D matrix that reshapes the base matrix.
-  3. Bias value. It's an integer or a float number that can increment or decrement each value in the output matrix.
+  3. Bias value. It's an integer or a float number that can affect each value of the output matrix.
  
  The  convolution_3d method can be run like this:
 
-   convolution = Convolution(base_matrix, filter_matrix, bias).convolution_3d()
+    Convolution(base_matrix, filter_matrix, bias).convolution_3d()
 
 
 
@@ -33,7 +33,7 @@ Convolution class:
  read_from_file*             - takes a file name as an argument and reads a matrix from it
                                file type must be txt or json format   
  write_to_file               - takes a file name and text as arguments and write the text to the file
- addition_2d                 - takes two matrices as arguments and performs mathematical addition  
+ addition_3d                 - takes two matrices as arguments and performs mathematical addition  
                                of the two matrices
  subtruction_2d              - takes two matrices as arguments and performs mathematical subtruction 
                                of the two matrices
@@ -47,25 +47,32 @@ Convolution class:
 
 
 
-
-
 * Files must be in .json or .txt format.
-  If it is a .txt file, the matrix must be in square brackets.
-  Each layer of the matrix must start on a new line, be in square brackets and separated by a comma.
-  Each row of the matrix must be written on a new line in square brackets.
+  If it is a .txt file, each value must be on a new line.
+  The first row is the number of layers, the second is the number of rows, third is the number of columns.
+  The rest are components of a given matrix.
      
    Eexample of 2 layer 3D matrix (2x3x3):
 
-                         [
-            first layer   [
-                           [1, 1, 1],
-                           [2, 2, 2],
-                           [3, 3, 3]
-                          ],
-           second layer   [
-                           [1, 1, 1],
-                           [2, 2, 2],
-                           [3, 3, 3]
-                          ]
-                         ]
-
+   2   <---- layer
+   3   <---- row
+   3   <---- column
+   11
+   12 
+   13
+   11
+   12
+   13
+   11  
+   12
+   13
+   21
+   22
+   23
+   21
+   22
+   23
+   21
+   22
+   23
+   
