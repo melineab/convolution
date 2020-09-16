@@ -13,8 +13,8 @@ Convolution class:
  The Convolution class has a convolution_3d method, which calculates the convolution of a 3D matrix according to the input.
 
  It takes 3 arguments:
-  1. Base matrix: it is a three-dimensional matrix, the shape of which changes during convolution
-  2. Filter matrix:  it is a 3D matrix that reshapes the base matrix.
+  1. Base matrix: it is a three-dimensional matrix, the shape of which changes during convolution.
+  2. Filter matrix:  it is a 3D matrix that reshapes the base matrix. The filter matrix cannot be larger than the base matriix.
   3. Bias value. It's an integer or a float number that can affect each value of the output matrix.
  
  The  convolution_3d method can be run like this:
