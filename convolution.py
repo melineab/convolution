@@ -1,5 +1,5 @@
 import json
-
+import re
 
 class Matrix:
 
@@ -90,10 +90,11 @@ class Matrix:
 
         for i in text:
             i = i.strip('\n')
-
-            if i.isnumeric():
-                matrix.append(float(i))
-            else:
+            try:
+                i = re.findall(r'-?\d+', i)
+                matrix.append(float(i[0]))
+    
+            except IndexError:
                 print('All values must be numeric')
                 exit()
 
@@ -113,7 +114,7 @@ class Matrix:
         col_list = []
 
         for i in range(len(text[3::])):
-            col_list.append(text[i+ col])
+            col_list.append(text[i+ 3])
             
             if len(col_list) == col:
                 row_list.append(col_list)
@@ -146,29 +147,23 @@ class Matrix:
     
 
         if file_extension == 'txt':
-            return self.write_txt(file_name, text)
+            return self.write_text(file_name, text)
 
         elif file_extension == 'json':
             return self.write_json(file_name, text)
   
     # -------- write to text file ----------------
     def write_text(self, file_name, matrix):
-        count = 0
         layer = len(matrix)
         row = len(matrix[0])
         col = len(matrix[0][0])
-        matrix = str(matrix)
-        
         with open(file_name, 'w+') as f:
             f.write(f'{layer}\n{row}\n{col}\n')
             for i in matrix:
-                if i.isnumeric():
-                    f.write(f'{i}\n')
-                    count += 1
+                for j in i:
+                    for item in j:
+                        f.write(f'{item}\n')
 
-        if count != layer * row * col:
-           print('Missing value')
-           exit()
     
     # ---------  write to json  ------------------------
 
@@ -204,14 +199,14 @@ class Matrix:
             print('Sizes of two matrices must be the same')
 
         for l in range(layer):
-            layer_matrix.append(self.__addition_2d(matrix3d_a[l],matrix3d_b[l]))
+            layer_matrix.append(self.addition_2d(matrix3d_a[l],matrix3d_b[l]))
          
         self.matrix = layer_matrix
         return self.matrix
 
     
 
-    def __addition_2d(self, matrix_a, matrix_b):
+    def addition_2d(self, matrix_a, matrix_b):
         self.matrix = []
 
         # check correspondence of matrices
@@ -363,7 +358,7 @@ class Convolution:
     def convolution2d(self):
         # function  returns a list of result of
         # convolutions of 1xRxC matrices
-
+        self.final_result = []
         filter_matrix = []
         
         # loop through layers
@@ -403,7 +398,6 @@ class Convolution:
         
         if self.final_result == []:
             self.final_result = self.convolution2d()
-        
         if len(self.final_result) == 1:
             return self.final_result
         
