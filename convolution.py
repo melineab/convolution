@@ -93,7 +93,6 @@ class Matrix:
             try:
                 i = re.findall(r'-?\d+', i)
                 matrix.append(float(i[0]))
-    
             except IndexError:
                 print('All values must be numeric')
                 exit()
