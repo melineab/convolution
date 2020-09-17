@@ -196,7 +196,22 @@ class Matrix:
 
     # ----------------    addition of matrices   ------------------------
 
-    def addition_2d(self, matrix_a, matrix_b):
+    def addition_3d(self, matrix3d_a, matrix3d_b):
+        layer_matrix = []
+        if len(matrix3d_a) == len(matrix3d_b):
+            layer = len(matrix3d_a)
+        else:
+            print('Sizes of two matrices must be the same')
+
+        for l in range(layer):
+            layer_matrix.append(self.__addition_2d(matrix3d_a[l],matrix3d_b[l]))
+         
+        self.matrix = layer_matrix
+        return self.matrix
+
+    
+
+    def __addition_2d(self, matrix_a, matrix_b):
         self.matrix = []
 
         # check correspondence of matrices
@@ -214,7 +229,9 @@ class Matrix:
         return self.matrix
 
 
-    def addition_3d(self, matrix3d_a, matrix3d_b):
+    # ----------------    subtraction of matrices   ------------------------
+    
+    def subtraction_3d(self, matrix3d_a, matrix3d_b):
         layer_matrix = []
         if len(matrix3d_a) == len(matrix3d_b):
             layer = len(matrix3d_a)
@@ -222,18 +239,17 @@ class Matrix:
             print('Sizes of two matrices must be the same')
 
         for l in range(layer):
-            layer_matrix.append(self.addition_2d(matrix3d_a[l],matrix3d_b[l]))
+            layer_matrix.append(self.__subtraction_2d(matrix3d_a[l],matrix3d_b[l]))
          
         self.matrix = layer_matrix
         return self.matrix
 
-    # ----------------    subtraction of matrices   ------------------------
 
-    def subtraction_2d(self, matrix_a, matrix_b):
+    def __subtraction_2d(self, matrix_a, matrix_b):
         self.checking(matrix_a, matrix_b)
         self.matrix = []
 
-        # subtraction of two matrices:
+        # subtraction of two 2D matrices:
         for i in range(len(matrix_a)):
             new_row = []
             for j in range(len(matrix_a[i])):
@@ -244,11 +260,27 @@ class Matrix:
    
    # ----------------    multiplication of matrices   ------------------------
 
-    def multiply_2d(self, matrix_a, matrix_b):
+    
+    def multiply_3d(self, matrix3d_a, matrix3d_b):
+        layer_matrix = []
+        if len(matrix3d_a) !=  len(matrix3d_b):
+            print('Number of layers of two matrices must be the same')
+            exit()
+
+        layer = len(matrix3d_a)
+     
+        for l in range(layer):
+            self.matrix.append(self.__multiply_2d(matrix3d_a[l], matrix3d_b[l]))
+       
+        return self.matrix
+    
+
+    def __multiply_2d(self, matrix_a, matrix_b):
+        matrix_2d = []
 
         # checking compatibility of two matrices
         if len(matrix_a[0]) != len(matrix_b):
-            print("The number of columns of the 1st matrix must\n"
+            print("The number of columns of the 1st matrix must be\n"
                   "equal the number of rows of the 2nd matrix.")
             exit()
 
@@ -264,23 +296,23 @@ class Matrix:
                     idx += 1
 
                 new_row.append(round(res, 1))
-            self.matrix.append(new_row)
+            matrix_2d.append(new_row)
 
-        return self.matrix
+        return matrix_2d
 
-       
 
     # ----------------    scalar multiplication of matrices   ------------------
 
-    def scalar_multiplication_2d(self, constant, matrix):
+    def scalar_multiplication_3d(self, constant, matrix):
         self.matrix = []
-
-        for i in matrix:
-            new_row = []
-            for n in i:
-                new_row.append(round(n * constant, 2))
-
-            self.matrix.append(new_row)
+        for layer in matrix:
+            new_layer = []
+            for row in layer:
+                new_row = []
+                for i in row:
+                    new_row.append(round(i * constant, 2))
+                new_layer.append(new_row)
+            self.matrix.append(new_layer)
         return self.matrix
 
     # ----------------    inversion of matrices  2x2  ------------------------
@@ -321,7 +353,8 @@ class Matrix:
 
 class Convolution:
     
-    def __init__(self, input_matrix: list = [], filter_matrix: list = [], bias_value: int = 0):
+    def __init__(self, input_matrix: list = [], filter_matrix: list = [], 
+            bias_value: int = 0):
         self.input_matrix = input_matrix
         self.filter_matrices = filter_matrix
         self.bias = bias_value
@@ -374,7 +407,8 @@ class Convolution:
         if len(self.final_result) == 1:
             return self.final_result
         
-        add_res =  matrix.addition_2d(self.final_result[0], self.final_result[1])
+        add_res =  matrix.addition_2d(self.final_result[0], 
+                self.final_result[1])
 
         self.final_result[0] = add_res
         self.final_result.remove(self.final_result[1])

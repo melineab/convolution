@@ -28,22 +28,25 @@ Convolution class:
  The Matrix class creates and performs mathematical operations on matrices
  The class has the following methods:
 
- create_matrix_from_stdin    - creates a 2D matrix according to user input 
  create_3d_matrix_from_stdin - creates a 3D matrix according to user input 
+
  read_from_file*             - takes a file name as an argument and reads a matrix from it
                                file type must be txt or json format   
+
  write_to_file               - takes a file name and text as arguments and write the text to the file
- addition_3d                 - takes two matrices as arguments and performs mathematical addition  
+
+ addition_3d                 - takes two 3D matrices as arguments and performs mathematical addition  
                                of the two matrices
- subtruction_2d              - takes two matrices as arguments and performs mathematical subtruction 
+
+ subtruction_3d              - takes two 3D matrices as arguments and performs mathematical subtruction 
                                of the two matrices
- multiply_2d                 - takes two matrices as arguments and performs mathematical nultiplication 
+
+ multiply_3d                 - takes two 3D matrices as arguments and performs mathematical nultiplication 
                                of the two matrices
- scalar_multiplication_2d    - takes a number and a matrix as arguments and performs mathematical
+
+ scalar_multiplication_3d    - takes a number and a 3D matrix as arguments and performs mathematical
                                scalar multiplication of the matrix
- invers2x2                   - takes 2x2 matrix as argument and performs mathematical invers of the 2x2 matrix 
- division2x2                 - takes two 2x2 matrices(A, B), inverses B matrix and multiplies A matrix by 
-                               inverted B  matrix
+
 
 
 
