@@ -81,7 +81,8 @@ Convolution class:
    3
  
  
- If it is a .json file, the 3D matrix must be in square brackets. Every layer, every matrix, every row of a 3D matrix must be in square brackets, separated by commas.
+ If it is a .json file, the 3D matrix must be in square brackets. Every layer is a 2D matrix. 
+ Every 2D matrix, every row of a 2D matrix must be in square brackets, separated by commas.
  Each value in a row is an integer or float, separated by a comma. 
  
   Example of 2 layer 3D matrix (2x3x3):
