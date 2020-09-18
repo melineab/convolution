@@ -12,8 +12,8 @@ def test():
     conv = []
     
     # geting input matrix, filter_matrix
-    input_matrix = Matrix().read_from_file('input2.txt')
-    filter_matrix = Matrix().read_from_file('filter1.txt')
+    input_matrix = Matrix().read_from_file('data/input2.txt')
+    filter_matrix = Matrix().read_from_file('data/input2.txt')
     bias = 1
     
     # calling convolution3D
@@ -32,8 +32,8 @@ def test():
     conv = []
     
     # geting input matrix, filter_matrix
-    input_matrix = Matrix().read_from_file('input.txt')
-    filter_matrix = Matrix().read_from_file('filter.txt')
+    input_matrix = Matrix().read_from_file('data/input.txt')
+    filter_matrix = Matrix().read_from_file('data/filter.txt')
     bias = 0
     
     # calling convolution3D
