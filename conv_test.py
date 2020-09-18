@@ -41,7 +41,7 @@ def test():
     conv = convolution.convolution_3d()
     
     # writing to file
-    Matrix().write_to_file('output_1.json', conv)
+    Matrix().write_to_file('output_1.txt', conv)
     
     print('Test 2 Done!')
 

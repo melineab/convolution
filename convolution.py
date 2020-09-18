@@ -127,9 +127,9 @@ class Matrix:
 
 
     # ------------- read from json ------------------------
-    def read_json(self):  
+    def read_json(self, file_name):  
         try:    
-            with open(self.file_name, 'r+') as f:
+            with open(file_name, 'r+') as f:
                 self.matrix = json.load(f)
 
         except FileNotFoundError:

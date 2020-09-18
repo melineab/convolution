@@ -25,7 +25,7 @@ Convolution class:
 
  Matrix class:
 
- The Matrix class creates and performs mathematical operations on matrices
+ The Matrix class creates and performs mathematical operations on 3D matrices.
  The class has the following methods:
 
  create_3d_matrix_from_stdin - creates a 3D matrix according to user input 
@@ -50,32 +50,41 @@ Convolution class:
 
 
 
-* Files must be in .json or .txt format.
+* Files containing matrices must be in .json or .txt format.
+
   If it is a .txt file, each value must be on a new line.
-  The first row is the number of layers, the second is the number of rows, third is the number of columns.
-  The rest are components of a given matrix.
+  The first row is the number of layers(integer), the second is the number of rows(integer), the third is the number of columns(integer).
+  The rest are components of a given matrix(integer/float).
      
-   Eexample of 2 layer 3D matrix (2x3x3):
+   Example of 2 layer 3D matrix (2x3x3):
 
    2   <---- layer
    3   <---- row
    3   <---- column
-   11
-   12 
-   13
-   11
-   12
-   13
-   11  
-   12
-   13
-   21
-   22
-   23
-   21
-   22
-   23
-   21
-   22
-   23
-   
+   1
+   1 
+   1
+   2
+   2
+   2
+   3  
+   3
+   3
+   1
+   1
+   1
+   2
+   2
+   2
+   3
+   3
+   3
+ 
+ 
+ If it is a .json file, the 3D matrix must be in square brackets. Every layer, every matrix, every row of a 3D matrix must be in square brackets, separated by commas.
+ Each value in a row is an integer or float, separated by a comma. 
+ 
+  Example of 2 layer 3D matrix (2x3x3):
+  
+  [[[1, 1, 1], [2, 2, 2], [3, 3, 3]],[[1, 1, 1], [2, 2, 2], [3, 3, 3]]]
+ 
