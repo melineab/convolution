@@ -233,7 +233,8 @@ class Matrix:
             print('Sizes of two matrices must be the same')
 
         for l in range(layer):
-            layer_matrix.append(self.__subtraction_2d(matrix3d_a[l],matrix3d_b[l]))
+            layer_matrix.append(self.__subtraction_2d(matrix3d_a[l],
+                                matrix3d_b[l]))
          
         self.matrix = layer_matrix
         return self.matrix
@@ -257,14 +258,15 @@ class Matrix:
     
     def multiply_3d(self, matrix3d_a, matrix3d_b):
         layer_matrix = []
-        if len(matrix3d_a) !=  len(matrix3d_b):
+        if len(matrix4d_a) !=  len(matrix3d_b):
             print('Number of layers of two matrices must be the same')
             exit()
 
         layer = len(matrix3d_a)
      
         for l in range(layer):
-            self.matrix.append(self.__multiply_2d(matrix3d_a[l], matrix3d_b[l]))
+            self.matrix.append(self.__multiply_2d(matrix3d_a[l], 
+                               matrix3d_b[l]))
        
         return self.matrix
     
@@ -295,7 +297,7 @@ class Matrix:
         return matrix_2d
 
 
-    # ----------------    scalar multiplication of matrices   ------------------
+    # ----------------    scalar multiplication of matrices   -----------------
 
     def scalar_multiplication_3d(self, constant, matrix):
         self.matrix = []
