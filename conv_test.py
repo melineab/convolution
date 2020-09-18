@@ -13,7 +13,7 @@ def test():
     
     # geting input matrix, filter_matrix
     input_matrix = Matrix().read_from_file('data/input2.txt')
-    filter_matrix = Matrix().read_from_file('data/input2.txt')
+    filter_matrix = Matrix().read_from_file('data/filter1.txt')
     bias = 1
     
     # calling convolution3D
