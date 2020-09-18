@@ -258,7 +258,7 @@ class Matrix:
     
     def multiply_3d(self, matrix3d_a, matrix3d_b):
         layer_matrix = []
-        if len(matrix4d_a) !=  len(matrix3d_b):
+        if len(matrix3d_a) !=  len(matrix3d_b):
             print('Number of layers of two matrices must be the same')
             exit()
 
