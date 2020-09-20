@@ -349,17 +349,15 @@ class Matrix:
 
 class Convolution:
     
-    def __init__(self, input_matrix: list = [], filter_matrix: list = [], 
-            bias_value: int = 0):
-        self.input_matrix = input_matrix
-        self.filter_matrices = filter_matrix
-        self.bias = bias_value
-        self.final_result = []
+    def __init__(self):
+        self.input_matrix = []
+        self.filter_matrices = []
+        self.final_matrix = []
 
     def convolution2d(self):
         # function  returns a list of result of
         # convolutions of 1xRxC matrices
-        self.final_result = []
+        final_result = []
         filter_matrix = []
         
         # loop through layers
@@ -381,37 +379,64 @@ class Convolution:
                 for c in range(end_c):
                     res = 0
                     for n, i in enumerate(filter_matrix):
-                        for v, j in enumerate(i):
-                            ls = input_list[n + r][c + v]
-                            res = res + j * ls
-                    res_list.append(res + self.bias)
+                        try:
+                            for v, j in enumerate(i):
+                                ls = input_list[n + r][c + v]
+                                res = res + j * ls
+                        except TypeError:
+                            print('Values must be numeric!')
+                            exit()
+                    res_list.append(res)
                 resulting_list.append(res_list)    
-            self.final_result.append(resulting_list) 
-        return self.final_result
+            final_result.append(resulting_list) 
+        return final_result
 
-    def convolution_3d(self, final_result=[]):
+    def __convolution_3d(self, final_result=[]):
        # the function receives information about the results of
        # convolution of 2D matrices and, when combined,
        # obtains the final result for a 3D matrix
-        self.final_result = final_result
         matrix = Matrix()
         add_res = []
         
-        if self.final_result == []:
-            self.final_result = self.convolution2d()
-        if len(self.final_result) == 1:
-            return self.final_result
+        if final_result == []:
+            final_result = self.convolution2d()
+        if len(final_result) == 1:
+            return final_result
         
-        add_res =  matrix.addition_2d(self.final_result[0], 
-                self.final_result[1])
+        add_res =  matrix.addition_2d(final_result[0], final_result[1])
 
-        self.final_result[0] = add_res
-        self.final_result.remove(self.final_result[1])
+        final_result[0] = add_res
+        final_result.remove(final_result[1])
 
-        for size in range(len(self.final_result)):
-            return self.convolution_3d(self.final_result)
+        for size in range(len(final_result)):
+            return self.__convolution_3d(final_result)
 
-		    	
+
+    def convolution_3d(self, input_matrix: list = [], filter_matrix: list = [], 
+                       bias_value: int = 0):
+        self.filter_matrices = filter_matrix
+        base_len = len(input_matrix)
+        filter_len = len(filter_matrix)
+        deff = base_len - filter_len + 1
+
+        if deff < 1:
+            print('Filter matrix is larger than base matrix')
+            exit()
+        
+        for i in range(deff):
+            self.input_matrix = input_matrix[i:i + filter_len]
+            matrices = self.__convolution_3d() 
+            
+            for j in matrices[0]:
+                for n, v in enumerate(j):
+                    j[n] = v + bias_value
+           
+            self.final_matrix.append(matrices[0])
+       
+        return self.final_matrix   
+
+
+
 if __name__ == "__main__":
     pass
 

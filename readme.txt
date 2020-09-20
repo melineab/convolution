@@ -14,13 +14,12 @@ Convolution class:
 
  It takes 3 arguments:
   1. Base matrix: it is a three-dimensional matrix, the shape of which changes during convolution.
-  2. Filter matrix:  it is a 3D matrix that reshapes the base matrix. The filter matrix cannot be larger than the base matriix.
+  2. Filter matrix:  it is a 3D matrix that reshapes the base matrix. The filter matrix cannot be larger than the base matrix.
   3. Bias value. It's an integer or a float number that can affect each value of the output matrix.
  
  The  convolution_3d method can be run like this:
 
-    Convolution(base_matrix, filter_matrix, bias).convolution_3d()
-
+    Convolution().convolution_3d(base_matrix, filter_matrix, bias)   
 
 
  Matrix class:
@@ -88,4 +87,5 @@ Convolution class:
   Example of 2 layer 3D matrix (2x3x3):
   
   [[[1, 1, 1], [2, 2, 2], [3, 3, 3]],[[1, 1, 1], [2, 2, 2], [3, 3, 3]]]
+ 
  

@@ -17,8 +17,8 @@ def test():
     bias = 1
     
     # calling convolution3D
-    convolution = Convolution(input_matrix, filter_matrix, bias)
-    conv = convolution.convolution_3d()
+    convolution = Convolution()
+    conv = convolution.convolution_3d(input_matrix, filter_matrix, bias)
     
     # writing to file
     Matrix().write_to_file('output.json', conv)
@@ -37,8 +37,8 @@ def test():
     bias = 0
     
     # calling convolution3D
-    convolution = Convolution(input_matrix, filter_matrix, bias) 
-    conv = convolution.convolution_3d()
+    convolution = Convolution() 
+    conv = convolution.convolution_3d(input_matrix, filter_matrix, bias)
     
     # writing to file
     Matrix().write_to_file('output_1.txt', conv)
